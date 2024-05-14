@@ -1,6 +1,6 @@
 # HTTP Server (Tomcat) Port
 server: 
-  port: 8081
+  port: 8089
 logging.level.org.hibernate.SQL: DEBUG
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
@@ -10,16 +10,10 @@ error:
 
 spring:
    application:
-     name: unlimits_gateway
+     name: unlimits_docs
    main:
      allow-bean-definition-overriding: true
 
-openapi:
- service:
-   title: price-service doc #title that you will want to display in the swagger ui
-   version: 1.0.0 
-   url: http://localhost:8080 #api gateway url
-   
 springdoc:
   enable-native-support: true
   api-docs:
