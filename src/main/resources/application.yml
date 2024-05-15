@@ -23,13 +23,13 @@ springdoc:
     path: /api/swagger-ui.html
     config-url: /v3/api-docs/swagger-config
     urls:
-      - url: http://localhost:8080/auth/v3/api-docs
+      - url: http://51.79.159.7:8080/auth/v3/api-docs
         name: unlimits_auth
         primaryName: unlimits_auth
-      - url: http://localhost:8080/content/v3/api-docs
+      - url: http://51.79.159.7:8080/content/v3/api-docs
         name: unlimits_content
         primaryName: unlimits_content
-      - url: http://localhost:8080/integration/v3/api-docs
+      - url: http://51.79.159.7:8080/integration/v3/api-docs
         name: unlimits_integration
         primaryName: unlimits_integration
 management:

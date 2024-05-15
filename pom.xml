@@ -56,4 +56,32 @@
 		</dependency>
 		
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<!-- or newer version -->
+				<configuration>
+					<source>${maven.compiler.source>}</source> <!-- depending on your project -->
+					<target>${maven.compiler.target}}</target> <!-- depending on your project -->
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${org.mapstruct.version}</version>
+						</path>
+						<!-- other annotation processors -->
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.brijframework.docs.DocsApp</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
