@@ -1,9 +1,11 @@
 # HTTP Server (Tomcat) Port
 server: 
   port: 8089
+  forward-headers-strategy: framework
 logging.level.org.hibernate.SQL: DEBUG
 logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 # Disable Spring Boot's "Whitelabel" default error page, so we can use our own
+  
 error:
   whitelabel:
     enabled: true
@@ -32,6 +34,15 @@ springdoc:
       - url: http://51.79.159.7:8080/integration/v3/api-docs
         name: unlimits_integration
         primaryName: unlimits_integration
+      - url: http://51.79.159.7:8080/client/v3/api-docs
+        name: unlimits_client
+        primaryName: unlimits_client
+openapi:
+  service:
+    title: docs
+    version: 1.0.0
+    url: http://51.79.159.7:8089
+    
 management:
   endpoints:
     web:
