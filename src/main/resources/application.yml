@@ -1,21 +1,37 @@
-# HTTP Server (Tomcat) Port
-server: 
-  port: 8089
-  forward-headers-strategy: framework
-logging.level.org.hibernate.SQL: DEBUG
-logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-# Disable Spring Boot's "Whitelabel" default error page, so we can use our own
-  
-error:
-  whitelabel:
-    enabled: true
-
 spring:
+ config: 
+   activate:
+    on-profile: local
+---    
+spring:
+   config:
+     activate:
+      on-profile: local
    application:
      name: unlimits_docs
    main:
      allow-bean-definition-overriding: true
-
+     
+server: 
+  host: 51.79.159.7
+  port: 9090
+  resource:
+    location: file:C:/app_runs/unlimits-resources/resource
+  gateway:
+    host: 51.79.159.7
+    port: 8080
+    endpoint: docs
+  eureka:
+    host: 51.79.159.7
+    port: 1111  
+error:
+  whitelabel:
+    enabled: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    
 springdoc:
   enable-native-support: true
   api-docs:
@@ -37,11 +53,84 @@ springdoc:
       - url: http://51.79.159.7:8080/client/v3/api-docs
         name: unlimits_client
         primaryName: unlimits_client
+      - url: http://51.79.159.7:8080/resource/v3/api-docs
+        name: unlimits_resource
+        primaryName: unlimits_resource
 openapi:
   service:
     title: docs
     version: 1.0.0
-    url: http://51.79.159.7:8089
+    url: http://${server.gateway.host}:${server.gateway.port} #api gateway url
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+# Discovery Server Access
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/     
+---
+spring:
+   config:
+     activate:
+      on-profile: develop
+   application:
+     name: unlimits_docs
+   main:
+     allow-bean-definition-overriding: true
+
+server: 
+  host: 51.79.159.7
+  port: 9090
+  resource:
+    location: file:C:/app_runs/unlimits-resources/resource
+  gateway:
+    host: 51.79.159.7
+    port: 8080
+    endpoint: docs
+  eureka:
+    host: 51.79.159.7
+    port: 1111  
+error:
+  whitelabel:
+    enabled: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /api/swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: http://51.79.159.7:8081/auth/v3/api-docs
+        name: unlimits_auth
+        primaryName: unlimits_auth
+      - url: http://51.79.159.7:8081/content/v3/api-docs
+        name: unlimits_content
+        primaryName: unlimits_content
+      - url: http://51.79.159.7:8081/integration/v3/api-docs
+        name: unlimits_integration
+        primaryName: unlimits_integration
+      - url: http://51.79.159.7:8081/client/v3/api-docs
+        name: unlimits_client
+        primaryName: unlimits_resource
+      - url: http://51.79.159.7:8081/resource/v3/api-docs
+        name: unlimits_resource
+        primaryName: unlimits_resource
+openapi:
+  service:
+    title: docs
+    version: 1.0.0
+    url: http://${server.gateway.host}:${server.gateway.port}/${server.gateway.endpoint} #api gateway url
     
 management:
   endpoints:
@@ -53,4 +142,71 @@ management:
 eureka:
     client:
       serviceUrl:
-        defaultZone: http://localhost:1111/eureka/       
+        defaultZone: http://localhost:1111/eureka/   
+
+---
+spring:
+   config:
+     activate:
+      on-profile: stage
+   application:
+     name: unlimits_docs
+   main:
+     allow-bean-definition-overriding: true
+server: 
+  host: 51.79.159.7
+  port: 9090
+  resource:
+    location: file:C:/app_runs/unlimits-resources/resource
+  gateway:
+    host: 51.79.159.7
+    port: 8082
+    endpoint: docs
+  eureka:
+    host: 51.79.159.7
+    port: 1111  
+error:
+  whitelabel:
+    enabled: true
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+springdoc:
+  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /api/swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: http://${server.gateway.host}:${server.gateway.port}/auth/v3/api-docs
+        name: unlimits_auth
+        primaryName: unlimits_auth
+      - url: http://${server.gateway.host}:${server.gateway.port}/content/v3/api-docs
+        name: unlimits_content
+        primaryName: unlimits_content
+      - url: http://${server.gateway.host}:${server.gateway.port}/integration/v3/api-docs
+        name: unlimits_integration
+        primaryName: unlimits_integration
+      - url: http://${server.gateway.host}:${server.gateway.port}/client/v3/api-docs
+        name: unlimits_client
+        primaryName: unlimits_client
+openapi:
+  service:
+    title: docs
+    version: 1.0.0
+    url: http://${server.gateway.host}:${server.gateway.port} #api gateway url
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Discovery Server Access
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/
