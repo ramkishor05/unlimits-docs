@@ -23,7 +23,7 @@ server:
     endpoint: docs
   eureka:
     host: 51.79.159.7
-    port: 1111  
+    port: 1001  
 error:
   whitelabel:
     enabled: true
