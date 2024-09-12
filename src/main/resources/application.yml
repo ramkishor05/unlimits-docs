@@ -1,9 +1,4 @@
 spring:
- config: 
-   activate:
-    on-profile: local
----    
-spring:
    config:
      activate:
       on-profile: local
@@ -11,19 +6,18 @@ spring:
      name: unlimits_docs
    main:
      allow-bean-definition-overriding: true
-     
 server: 
   host: 51.79.159.7
-  port: 9090
+  port: 9091
   resource:
     location: file:C:/app_runs/unlimits-resources/resource
   gateway:
     host: 51.79.159.7
-    port: 8080
+    port: 8081
     endpoint: docs
   eureka:
     host: 51.79.159.7
-    port: 1001  
+    port: 1001 
 error:
   whitelabel:
     enabled: true
@@ -31,7 +25,6 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-    
 springdoc:
   enable-native-support: true
   api-docs:
@@ -41,21 +34,18 @@ springdoc:
     path: /api/swagger-ui.html
     config-url: /v3/api-docs/swagger-config
     urls:
-      - url: http://51.79.159.7:8080/auth/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/auth/v3/api-docs
         name: unlimits_auth
         primaryName: unlimits_auth
-      - url: http://51.79.159.7:8080/content/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/content/v3/api-docs
         name: unlimits_content
         primaryName: unlimits_content
-      - url: http://51.79.159.7:8080/integration/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/integration/v3/api-docs
         name: unlimits_integration
         primaryName: unlimits_integration
-      - url: http://51.79.159.7:8080/client/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/client/v3/api-docs
         name: unlimits_client
         primaryName: unlimits_client
-      - url: http://51.79.159.7:8080/resource/v3/api-docs
-        name: unlimits_resource
-        primaryName: unlimits_resource
 openapi:
   service:
     title: docs
@@ -67,12 +57,12 @@ management:
     web:
       exposure:
         include: "*"
-        
+
 # Discovery Server Access
 eureka:
     client:
       serviceUrl:
-        defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/     
+        defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/
 ---
 spring:
    config:
@@ -82,19 +72,18 @@ spring:
      name: unlimits_docs
    main:
      allow-bean-definition-overriding: true
-
 server: 
   host: 51.79.159.7
-  port: 9090
+  port: 9092
   resource:
     location: file:C:/app_runs/unlimits-resources/resource
   gateway:
     host: 51.79.159.7
-    port: 8080
+    port: 8082
     endpoint: docs
   eureka:
     host: 51.79.159.7
-    port: 1111  
+    port: 1002 
 error:
   whitelabel:
     enabled: true
@@ -111,26 +100,23 @@ springdoc:
     path: /api/swagger-ui.html
     config-url: /v3/api-docs/swagger-config
     urls:
-      - url: http://51.79.159.7:8081/auth/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/auth/v3/api-docs
         name: unlimits_auth
         primaryName: unlimits_auth
-      - url: http://51.79.159.7:8081/content/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/content/v3/api-docs
         name: unlimits_content
         primaryName: unlimits_content
-      - url: http://51.79.159.7:8081/integration/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/integration/v3/api-docs
         name: unlimits_integration
         primaryName: unlimits_integration
-      - url: http://51.79.159.7:8081/client/v3/api-docs
+      - url: http://${server.gateway.host}:${server.gateway.port}/client/v3/api-docs
         name: unlimits_client
-        primaryName: unlimits_resource
-      - url: http://51.79.159.7:8081/resource/v3/api-docs
-        name: unlimits_resource
-        primaryName: unlimits_resource
+        primaryName: unlimits_client
 openapi:
   service:
     title: docs
     version: 1.0.0
-    url: http://${server.gateway.host}:${server.gateway.port}/${server.gateway.endpoint} #api gateway url
+    url: http://${server.gateway.host}:${server.gateway.port} #api gateway url
     
 management:
   endpoints:
@@ -142,8 +128,7 @@ management:
 eureka:
     client:
       serviceUrl:
-        defaultZone: http://localhost:1111/eureka/   
-
+        defaultZone: http://${server.eureka.host}:${server.eureka.port}/eureka/
 ---
 spring:
    config:
@@ -155,16 +140,16 @@ spring:
      allow-bean-definition-overriding: true
 server: 
   host: 51.79.159.7
-  port: 9090
+  port: 9093
   resource:
     location: file:C:/app_runs/unlimits-resources/resource
   gateway:
     host: 51.79.159.7
-    port: 8082
+    port: 8083
     endpoint: docs
   eureka:
     host: 51.79.159.7
-    port: 1111  
+    port: 1003 
 error:
   whitelabel:
     enabled: true
