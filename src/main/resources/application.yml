@@ -182,7 +182,7 @@ openapi:
   service:
     title: docs
     version: 1.0.0
-    url: http://${server.gateway.host}:${server.gateway.port} #api gateway url
+    url: http://${server.gateway.host}:${server.gateway.port}/${server.gateway.endpoint} #api gateway url   
     
 management:
   endpoints:
